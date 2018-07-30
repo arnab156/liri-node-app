@@ -30,21 +30,49 @@ if (action === "my-tweets") {
 }
 
 
-
-
-
-
-
-
-
 // * `spotify-this-song`
+// This will show the following information about the song in your terminal/bash window
+    
+    //  * Artist(s)
+    //  * The song's name
+    //  * A preview link of the song from Spotify
+    //  * The album that the song is from
+    if (action === "spotify-this-song") {
+        spotify.search({ type: 'track', query: 'The Sign by Ace of base' }, function(err, data) {
+            if (err) {
+              return console.log('Error occurred: ' + err);
+            }
+           
+          console.log(JSON.stringify(data, null, 2)); 
+          });
+    
+    }
+    
 
 
 
 // * `do-what-it-says`
+if (action === "do-what-it-says") {
+    
+    fs.readFile("random.txt", "utf8", function(error, data) {
+    var songName = data;
+    console.log(songName);
+    
+        spotify.search({ type: 'track', query: songName }, function(err, data1) {
+            if (err) {
+            return console.log('Error occurred: ' + err);
+            }
+            console.log("RANDOM SONG IS READING" + JSON.stringify(data1, null, 2)); 
+
+        });
 
 
 
+    });
+
+    
+
+}
 //movie-this
 if (action === "movie-this") {
     var movieName = "Mr.Nobody";
